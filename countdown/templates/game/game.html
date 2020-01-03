@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+
+{% block javascript %}
+<script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous">
+</script>
+<script>
+$(document).ready(function(){
+    $("#guess").click(function(){
+        let text = $("#id_Guess").val();
+        $.ajax({
+            url: $("#guess").attr('rel'),
+            type: 'POST',
+            data: {text:text},
+            success: function(response){
+                $("#text").text(response);
+            }});
+        });
+})
+</script>
+{% endblock %}
+
+{% block content %}
+<h3>Instructions:</h3>
+<p>Guess as many words within the given<br>
+    letters as possible within thirty seconds.<br>
+    The more words you guess and the longer<br>
+    they are, the more points you get.<br>
+<center>
+    <h1 id="timer"></h1>
+
+    <h2 id="scram">{{ scram_word }}</h2>
+
+    <div class="container">
+        <div class="card-mx-auto">
+            <div class="card-body">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <p id="text"></p>
+                <button rel="" class="btn btn-primary" id="guess" onclick="clear()">Guess</button>
+            </div>
+        </div>
+    </div>
+
+    <button id="start" type="button" class="btn btn-primary" onclick="timer()">Start</button>
+</center>
+
+<script>
+document.getElementById('scram').style.visibility = 'hidden'
+document.getElementById('guess').style.visibility = 'hidden'
+
+<!--haven't quite gotten this working yet-->
+<!--function clear() {-->
+<!--    document.getElementById('text')= ''-->
+<!--}-->
+
+function timer() {
+    document.getElementById('start').style.visibility = 'hidden'
+    document.getElementById('scram').style.visibility = 'visible'
+    document.getElementById('guess').style.visibility = 'visible'
+    var timeLeft = 30;
+        var elem = document.getElementById('timer');
+
+        var timerId = setInterval(countdown, 1000);
+
+        function countdown() {
+          if (timeLeft == 0) {
+            clearTimeout(timerId);
+            location.href = 'name';
+          } else {
+            elem.innerHTML = timeLeft;
+            timeLeft--;
+          }
+        }
+       }
+
+</script>
+
+{% endblock %}
+

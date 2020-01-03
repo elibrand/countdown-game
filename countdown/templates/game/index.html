@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="jumbotron">
+  <h1 class="display-4">Countdown Game</h1>
+  <p class="lead">Play a bizzare version of a random British TV Show that no one cares about</p>
+  <hr class="my-4">
+  <p>See if you could become a word-finding wiz</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'game:game' %}" role="button">Play Now</a>
+  </p>
+</div>
+<div class="jumbotron">
+  <h1 class="display-4">High Score</h1>
+  <p class="lead">Check out all the folks who wasted their life here the most</p>
+  <hr class="my-4">
+  <p>Bet your name's not there</p>
+  <p class="lead">
+    <a class="btn btn-primary btn-lg" href="{% url 'game:high_score' %}" role="button">Check it out</a>
+  </p>
+</div>
+{% endblock %}

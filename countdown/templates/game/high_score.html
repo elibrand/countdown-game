@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Welcome to the high score</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col"></th>
+      <th scope="col">Player</th>
+      <th scope="col">Score</th>
+    </tr>
+  </thead>
+     {% for player in players %}
+  <tbody>
+      {% if player.name == your_name %}
+      <tr class="table-primary">
+      {% else %}
+      <tr>
+      {% endif %}
+      <th scope="row"></th>
+      <td>{{ player.name }}</td>
+      <td>{{ player.score }}</td>
+    </tr>
+  </tbody>
+       {% endfor %}
+</table>
+{% endblock %}

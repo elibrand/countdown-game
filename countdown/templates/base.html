@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Countdown Game</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<body>
+{% block header %}
+<!-- Image and text -->
+<nav class="navbar navbar-light bg-light">
+  <a class="navbar-brand" href="{% url 'game:index' %}">
+    <img src="data:image/png;base64,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" width="30" height="30" class="d-inline-block align-top" alt="">
+    Countdown
+  </a>
+</nav>
+{% endblock %}
+
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+ <footer>
+    <div class="footer-copyright text-center text-black-50 py-3 fixed-bottom">© 2019 Copyright:
+        <a class="dark-grey-text" href="https://mdbootstrap.com/education/bootstrap/"> Countdown</a>
+    </div>
+ </footer>
+{% endblock %}
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+{% block javascript %}
+{% endblock %}
+</body>
+</html>
